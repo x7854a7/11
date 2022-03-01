@@ -2,29 +2,29 @@
 
 > Kubernetes is an open-source container-orchestration system for automating application deployment, scaling, and management. It was originally designed by Google, and is now maintained by the Cloud Native Computing Foundation.
 
-## Summary 
+## Summary
 
-- [Tools](#tools)
-- [Container Environment](#container-environment)
-- [Information Gathering](#information-gathering)
-- [RBAC Configuration](#rbac-configuration)
-    - [Listing Secrets](#listing-secrets)
-    - [Access Any Resource or Verb](#access-any-resource-or-verb)
-    - [Pod Creation](#pod-creation)
-    - [Privilege to Use Pods/Exec](#privilege-to-use-pods-exec)
-    - [Privilege to Get/Patch Rolebindings](#privilege-to-get-patch-rolebindings)
-    - [Impersonating a Privileged Account](#impersonating-a-privileged-account)
-- [Privileged Service Account Token](#privileged-service-account-token)
-- [Interesting endpoints to reach](#interesting-endpoints-to-reach)
-- [API addresses that you should know](#api-addresses-that-you-should-know)
-- [References](#references)
+* [Tools](./#tools)
+* [Container Environment](./#container-environment)
+* [Information Gathering](./#information-gathering)
+* [RBAC Configuration](./#rbac-configuration)
+  * [Listing Secrets](./#listing-secrets)
+  * [Access Any Resource or Verb](./#access-any-resource-or-verb)
+  * [Pod Creation](./#pod-creation)
+  * [Privilege to Use Pods/Exec](./#privilege-to-use-pods-exec)
+  * [Privilege to Get/Patch Rolebindings](./#privilege-to-get-patch-rolebindings)
+  * [Impersonating a Privileged Account](./#impersonating-a-privileged-account)
+* [Privileged Service Account Token](./#privileged-service-account-token)
+* [Interesting endpoints to reach](./#interesting-endpoints-to-reach)
+* [API addresses that you should know](./#api-addresses-that-you-should-know)
+* [References](./#references)
 
 ## Tools
 
 * [kubeaudit](https://github.com/Shopify/kubeaudit) - Audit Kubernetes clusters against common security concerns
-* [kubesec.io](https://kubesec.io/) - Security risk analysis for Kubernetes resources
+* [kubesec.io](https://kubesec.io) - Security risk analysis for Kubernetes resources
 * [kube-bench](https://github.com/aquasecurity/kube-bench) - Checks whether Kubernetes is deployed securely by running [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/)
-* [kube-hunter](https://github.com/aquasecurity/kube-hunter) - Hunt for security weaknesses in Kubernetes clusters 
+* [kube-hunter](https://github.com/aquasecurity/kube-hunter) - Hunt for security weaknesses in Kubernetes clusters
 * [katacoda](https://katacoda.com/courses/kubernetes) - Learn Kubernetes using interactive broser-based scenarios
 * [kubescape](https://github.com/armosec/kubescape) - Automate Kubernetes cluster scans to identify security issues
 
@@ -46,17 +46,17 @@ If the `kubectl` utility is installed in the container, it will use this service
 
 ### Environment Variables
 
-The `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` environment variables are automatically provided to the container. They contain the IP address and port number of the Kubernetes master node.  If `kubectl` is installed, it will use these values automatically. If not, the values can be used to determine the correct IP address to send API requests to.
+The `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` environment variables are automatically provided to the container. They contain the IP address and port number of the Kubernetes master node. If `kubectl` is installed, it will use these values automatically. If not, the values can be used to determine the correct IP address to send API requests to.
 
 ```
 KUBERNETES_SERVICE_HOST=192.168.154.228
 KUBERNETES_SERVICE_PORT=443
 ```
 
-Additionally, [environment variables](https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services) are automatically created for each Kubernetes service running in the current namespace when the container was created.  The environment variables are named using two patterns:
+Additionally, [environment variables](https://kubernetes.io/docs/concepts/services-networking/service/#discovering-services) are automatically created for each Kubernetes service running in the current namespace when the container was created. The environment variables are named using two patterns:
 
-- A simplified `{SVCNAME}_SERVICE_HOST` and `{SVCNAME}_SERVICE_PORT` contain the IP address and default port number for the service.
-- A [Docker links](https://docs.docker.com/network/links/#environment-variables) collection of variables named `{SVCNAME}_PORT_{NUM}_{PROTOCOL}_{PROTO|PORT|ADDR}` for each port the service exposes.
+* A simplified `{SVCNAME}_SERVICE_HOST` and `{SVCNAME}_SERVICE_PORT` contain the IP address and default port number for the service.
+* A [Docker links](https://docs.docker.com/network/links/#environment-variables) collection of variables named `{SVCNAME}_PORT_{NUM}_{PROTOCOL}_{PROTO|PORT|ADDR}` for each port the service exposes.
 
 For example, all of the following environment variables would be available if a `redis-master` service were running with port 6379 exposed:
 
@@ -72,15 +72,15 @@ REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
 
 ### Simulating `kubectl` API Requests
 
-Most containers within a Kubernetes cluster won't have the `kubectl` utility installed. If running the [one-line `kubectl` installer](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux) within the container isn't an option, you may need to craft Kubernetes HTTP API requests manually. This can be done by using `kubectl` *locally* to determine the correct API request to send from the container.
+Most containers within a Kubernetes cluster won't have the `kubectl` utility installed. If running the [one-line `kubectl` installer](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/#install-kubectl-binary-with-curl-on-linux) within the container isn't an option, you may need to craft Kubernetes HTTP API requests manually. This can be done by using `kubectl` _locally_ to determine the correct API request to send from the container.
 
 1. Run the desired command at the maximum verbosity level using `kubectl -v9 ...`
-1. The output will include HTTP API endpoint URL, the request body, and an example curl command.
-1. Replace the endpoint URL's hostname and port with the `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` values from the container's environment variables.
-1. Replace the masked "Authorization: Bearer" token value with the contents of `/var/run/secrets/kubernetes.io/serviceaccount/token` from the container.
-1. If the request had a body, ensure the "Content-Type: application/json" header is included and send the request body using the customary method (for curl, use the `--data` flag).
+2. The output will include HTTP API endpoint URL, the request body, and an example curl command.
+3. Replace the endpoint URL's hostname and port with the `KUBERNETES_SERVICE_HOST` and `KUBERNETES_SERVICE_PORT` values from the container's environment variables.
+4. Replace the masked "Authorization: Bearer" token value with the contents of `/var/run/secrets/kubernetes.io/serviceaccount/token` from the container.
+5. If the request had a body, ensure the "Content-Type: application/json" header is included and send the request body using the customary method (for curl, use the `--data` flag).
 
-For example, this output was used to create the [Service Account Permissions](#service-account-permissions) request:
+For example, this output was used to create the [Service Account Permissions](./#service-account-permissions) request:
 
 ```powershell
 # NOTE: only the Authorization and Content-Type headers are required. The rest can be omitted.
@@ -97,7 +97,7 @@ I1028 18:58:38.295760   76118 round_trippers.go:444] Response Headers:
 
 ### Service Account Permissions
 
-The default service account may have been granted additional permissions that make cluster compromise or lateral movement easier.  
+The default service account may have been granted additional permissions that make cluster compromise or lateral movement easier.\
 The following can be used to determine the service account's permissions:
 
 ```powershell
@@ -132,7 +132,7 @@ True Kubernetes Volumes are typically used as shared storage or for persistent s
 
 Kubernetes supports a wide range of [security contexts](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/) for container and pod execution. The most important of these is the "privileged" [security policy](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) which makes the host node's devices available under the container's `/dev` directory. This means having access to the host's Docker socket file (allowing arbitrary container actions) in addition to the host's root disks (which can be used to escape the container entirely).
 
-While there is no official way to check for privileged mode from *within* a container, checking if `/dev/kmsg` exists will usually suffice.
+While there is no official way to check for privileged mode from _within_ a container, checking if `/dev/kmsg` exists will usually suffice.
 
 ## RBAC Configuration
 
@@ -155,8 +155,7 @@ verbs:
 
 ### Pod Creation
 
-Check your right with `kubectl get role system:controller:bootstrap-signer -n kube-system -o yaml`.
-Then create a malicious pod.yaml file.
+Check your right with `kubectl get role system:controller:bootstrap-signer -n kube-system -o yaml`. Then create a malicious pod.yaml file.
 
 ```yaml
 apiVersion: v1
@@ -185,8 +184,7 @@ kubectl exec -it <POD NAME> -n <PODS NAMESPACE> –- sh
 
 ### Privilege to Get/Patch Rolebindings
 
-The purpose of this JSON file is to bind the admin "CluserRole" to the compromised service account. 
-Create a malicious RoleBinging.json file.
+The purpose of this JSON file is to bind the admin "CluserRole" to the compromised service account. Create a malicious RoleBinging.json file.
 
 ```powershell
 {
@@ -245,10 +243,9 @@ curl -v -H "Authorization: Bearer <jwt_token>" https://<master_ip:<port>/apis/ex
 curl -v -H "Authorization: Bearer <jwt_token>" https://<master_ip:<port>/apis/extensions/v1beta1/namespaces/default/daemonsets
 ```
 
+## API addresses that you should know
 
-## API addresses that you should know 
-
-*(External network visibility)*
+_(External network visibility)_
 
 ### cAdvisor
 
@@ -293,11 +290,10 @@ curl -k https://<IP Address>:10255
 http://<external-IP>:10255/pods
 ```
 
-
 ## References
 
-- [Kubernetes Pentest Methodology Part 1 - by Or Ida on August 8, 2019](https://securityboulevard.com/2019/08/kubernetes-pentest-methodology-part-1)
-- [Kubernetes Pentest Methodology Part 2 - by Or Ida on September 5, 2019](https://securityboulevard.com/2019/09/kubernetes-pentest-methodology-part-2)
-- [Kubernetes Pentest Methodology Part 3 - by Or Ida on November 21, 2019](https://securityboulevard.com/2019/11/kubernetes-pentest-methodology-part-3)
-- [Capturing all the flags in BSidesSF CTF by pwning our infrastructure - Hackernoon](https://hackernoon.com/capturing-all-the-flags-in-bsidessf-ctf-by-pwning-our-infrastructure-3570b99b4dd0)
-- [Kubernetes Pod Privilege Escalation](https://labs.bishopfox.com/tech-blog/bad-pods-kubernetes-pod-privilege-escalation)
+* [Kubernetes Pentest Methodology Part 1 - by Or Ida on August 8, 2019](https://securityboulevard.com/2019/08/kubernetes-pentest-methodology-part-1)
+* [Kubernetes Pentest Methodology Part 2 - by Or Ida on September 5, 2019](https://securityboulevard.com/2019/09/kubernetes-pentest-methodology-part-2)
+* [Kubernetes Pentest Methodology Part 3 - by Or Ida on November 21, 2019](https://securityboulevard.com/2019/11/kubernetes-pentest-methodology-part-3)
+* [Capturing all the flags in BSidesSF CTF by pwning our infrastructure - Hackernoon](https://hackernoon.com/capturing-all-the-flags-in-bsidessf-ctf-by-pwning-our-infrastructure-3570b99b4dd0)
+* [Kubernetes Pod Privilege Escalation](https://labs.bishopfox.com/tech-blog/bad-pods-kubernetes-pod-privilege-escalation)

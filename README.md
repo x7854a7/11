@@ -1,46 +1,43 @@
-# Payloads All The Things [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Payloads%20All%20The%20Things,%20a%20list%20of%20useful%20payloads%20and%20bypasses%20for%20Web%20Application%20Security%20-%20by%20@pentest_swissky&url=https://github.com/swisskyrepo/PayloadsAllTheThings/)
+# Books
 
-A list of useful payloads and bypasses for Web Application Security.
-Feel free to improve with your payloads and techniques !
-I :heart: pull requests :)
+> Grab a book and relax. Some of the best books in the industry.
 
-You can also contribute with a :beers: IRL, or using the sponsor button.
-
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/swisskyrepo/PayloadsAllTheThings/master/.github/banner.png">
-</p>
-
-
-Every section contains the following files, you can use the `_template_vuln` folder to create a new chapter:
-
-- README.md - vulnerability description and how to exploit it, including several payloads
-- Intruder - a set of files to give to Burp Intruder
-- Images - pictures for the README.md
-- Files - some files referenced in the README.md
-
-You might also like the `Methodology and Resources` folder :
-
-- [Methodology and Resources](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/)
-  - [Active Directory Attack.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Active%20Directory%20Attack.md)
-  - [Cloud - AWS Pentest.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Cloud%20-%20AWS%20Pentest.md)
-  - [Cloud - Azure Pentest.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Cloud%20-%20Azure%20Pentest.md)
-  - [Cobalt Strike - Cheatsheet.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Cobalt%20Strike%20-%20Cheatsheet.md)
-  - [Linux - Persistence.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Persistence.md)
-  - [Linux - Privilege Escalation.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Linux%20-%20Privilege%20Escalation.md)
-  - [Metasploit - Cheatsheet.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Metasploit%20-%20Cheatsheet.md)  
-  - [Methodology and enumeration.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Methodology%20and%20enumeration.md)
-  - [Network Pivoting Techniques.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Network%20Pivoting%20Techniques.md)
-  - [Network Discovery.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Network%20Discovery.md)
-  - [Reverse Shell Cheatsheet.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)
-  - [Subdomains Enumeration.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Subdomains%20Enumeration.md)
-  - [Windows - Download and Execute.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Download%20and%20Execute.md)
-  - [Windows - Mimikatz.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Mimikatz.md)
-  - [Windows - Persistence.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Persistence.md)
-  - [Windows - Post Exploitation Koadic.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Post%20Exploitation%20Koadic.md)
-  - [Windows - Privilege Escalation.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Privilege%20Escalation.md)
-  - [Windows - Using credentials.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Windows%20-%20Using%20credentials.md)
-- [CVE Exploits](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/CVE%20Exploits)
-
-
-You want more ? Check the [Books](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/BOOKS.md) and [Youtube videos](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/YOUTUBE.md) selections.
+- [Advanced Penetration Testing: Hacking the World's Most Secure Networks by Wil Allsopp (2017)](https://www.goodreads.com/book/show/32027337-advanced-penetration-testing)
+- [Android Hacker's Handbook by Joshua J. Drake et al. (2014)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-111860864X.html)
+- [Android Security Internals: An In-Depth Guide to Android's Security Architecture by Nikolay Elenkov (2015)](https://nostarch.com/androidsecurity)
+- [Attacking Network Protocols: A Hacker's Guide to Capture, Analysis, and Exploitation by James Forshaw (2018)](https://nostarch.com/networkprotocols)
+- [Black Hat Go: Go Programming for Hackers and Pentesters by Tom Steele, Chris Patten, and Dan Kottmann (2020)](https://nostarch.com/blackhatgo)
+- [Black Hat Python: Python Programming for Hackers and Pentesters by Justin Seitz (2014)](https://www.goodreads.com/book/show/22299369-black-hat-python)
+- [Breaking into Information Security: Learning the Ropes 101 - Andrew Gill](https://leanpub.com/ltr101-breaking-into-infosec)
+- [Car Hacker's Handbook by Craig Smith (2016)](https://www.nostarch.com/carhacking)
+- [Cyberjutsu: Cybersecurity for the Modern Ninja by Ben McCarty (2021)](https://nostarch.com/cyberjutsu)
+- [Foundations of Information Security: A Straightforward Introduction by Jason Andress (2019)](https://nostarch.com/foundationsinfosec)
+- [Game Hacking: Developing Autonomous Bots for Online Games by Nick Cano (2016)](https://nostarch.com/gamehacking)
+- [Gray Hat Python: Python Programming for Hackers and Reverse Engineers by Justin Seitz (2009)](https://www.goodreads.com/book/show/5044768-gray-hat-python)
+- [Hacking: The Art of Exploitation by Jon Erickson (2004)](https://www.goodreads.com/book/show/61619.Hacking)
+- [iOS Hacker's Handbook by Charlie Miller et al. (2012)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118204123.html)
+- [Metasploit: The Penetration Tester's Guide by David Kennedy (2011)](https://www.nostarch.com/metasploit)
+- [OWASP Testing Guide: Stable](https://owasp.org/www-project-web-security-testing-guide/stable/)
+- [Penetration Testing: A Hands-On Introduction to Hacking by Georgia Weidman (2014)](https://nostarch.com/pentesting)
+- [Pentesting Azure Applications: The Definitive Guide to Testing and Securing  Deployments by Matt Burrough (2018)](https://nostarch.com/azure)
+- [Pratical Binary Analysis: Build Your Own Linux Tools for Binary instrumentation, Analysis, and Disassembly by Dennis Andriesse (2019)](https://nostarch.com/binaryanalysis)
+- [Pratical Forensic Imaging: Securing Digital Evidence with Linux Tools by Bruce Nikkel (2016)](https://nostarch.com/forensicimaging)
+- [Pratical IoT Hacking: The Definitive Guide to Attacking the Internet of Things by Fotios Chantzis, Ioannis Stais, Paulino Calderon, Evangelos Deirmentzoglou and Beau Woods (2021)](https://nostarch.com/practical-iot-hacking)
+- [Practical Doomsday: A User's Guide to the End of the World by Michal Zalewski (2022)](https://nostarch.com/practical-doomsday)
+- [Practical Social Engineering: A Primer for the Ethical Hacker by Joe Gray (2022)](https://nostarch.com/practical-social-engineering)
+- [Real-World Bug Hunting: A Field Guide to Web Hacking by Peter Yaworski (2019)](https://nostarch.com/bughunting)
+- [Rootkits and Bootkits: Reversing Modern Malware and Next Generation Threats by Alex Matrosov, Eugene Rodionov, and Sergey Bratus (2019)](https://nostarch.com/rootkits)
+- [The Art of Cyberwarfare: An Investigator's Guide to Espionage, Ransomware, and Organized Cybercrime by Jon DiMaggio (2022)](https://nostarch.com/art-cyberwarfare)
+- [The Car Hacker's Handbook: A Guide for the Penetration Tester by Craig Smith (2016)](https://nostarch.com/carhacking)
+- [The Browser Hacker's Handbook by Wade Alcorn et al. (2014)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118662091.html)
+- [The Database Hacker's Handbook, David Litchfield et al. (2005)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-0764578014.html)
+- [The Hacker Playbook: Practical Guide To Penetration Testing by Peter Kim (2014)](https://www.goodreads.com/book/show/21846565-the-hacker-playbook)
+- [The Hacker Playbook 2: Practical Guide to Penetration Testing by Peter Kim (2015)](https://www.goodreads.com/book/show/25791488-the-hacker-playbook-2)
+- [The Hacker Playbook 3: Practical Guide to Penetration Testing (Red Team Edition) by Peter Kim (2018)](https://www.goodreads.com/book/show/40028366-the-hacker-playbook-3)
+- [The Mac Hacker's Handbook by Charlie Miller & Dino Dai Zovi (2009)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-0470395362.html)
+- [The Hardware Hacking Handbook by Jasper van Woudenberg & Colin O'Flynn (2022)](https://nostarch.com/hardwarehacking)
+- [The Mobile Application Hacker's Handbook by Dominic Chell et al. (2015)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118958500.html)
+- [The Shellcoders Handbook by Chris Anley et al. (2007)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-047008023X.html)
+- [The Web Application Hackers Handbook by D. Stuttard, M. Pinto (2011)](http://www.wiley.com/WileyCDA/WileyTitle/productCd-1118026470.html)
+- [Violent Python: A Cookbook for Hackers, Forensic Analysts, Penetration Testers and Security Engineers by T.J. O'Connor (2012)](https://www.goodreads.com/book/show/16192263-violent-python)
+- [Web Hacking 101](https://leanpub.com/web-hacking-101)

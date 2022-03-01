@@ -2,11 +2,11 @@
 
 ## Summary
 
-* [Tools](#tools)
-* [CL.TE vulnerabilities](#cl.te-vulnerabilities)
-* [TE.CL vulnerabilities](#te.cl-vulnerabilities)
-* [TE.TE behavior: obfuscating the TE header](#te.te-behavior-obfuscating-the-te-header)
-* [References](#references)
+* [Tools](./#tools)
+* [CL.TE vulnerabilities](./#cl.te-vulnerabilities)
+* [TE.CL vulnerabilities](./#te.cl-vulnerabilities)
+* [TE.TE behavior: obfuscating the TE header](./#te.te-behavior-obfuscating-the-te-header)
+* [References](./#references)
 
 ## Tools
 
@@ -47,7 +47,7 @@ Challenge: https://portswigger.net/web-security/request-smuggling/lab-basic-cl-t
 
 ## TE.CL vulnerabilities
 
-> The front-end server uses the Transfer-Encoding header and the back-end server uses the Content-Length header. 
+> The front-end server uses the Transfer-Encoding header and the back-end server uses the Content-Length header.
 
 ```powershell
 POST / HTTP/1.1
@@ -77,7 +77,6 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 x=1
 0
-
 
 ```
 

